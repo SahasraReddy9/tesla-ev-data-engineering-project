@@ -1,118 +1,42 @@
-# 🚗 EV Market Intelligence System (Tesla EV Analytics Platform)
+# 🚗 EV Market Intelligence & Investment Analytics Platform
 
 ## 📌 Executive Summary
 
-The EV Market Intelligence System is an end-to-end data engineering and analytics platform designed to simulate real-world investment decision-making across leading electric vehicle companies.
+The EV Market Intelligence Platform is an end-to-end data engineering system designed to simulate real-world equity research and investment decision-making across leading electric vehicle companies.
 
-It transforms raw time-series EV stock data into structured insights using automated pipelines, enabling ranking, volatility tracking, and growth-based investment intelligence.
+It converts raw time-series stock data into structured financial intelligence, enabling comparison of companies based on price performance, volatility, growth trends, and trading activity.
+
+The system is designed to mimic how a quantitative analyst or portfolio manager would evaluate EV sector stocks.
 
 ---
 
 ## 🎯 Business Problem
 
-Financial analysts and retail investors often struggle to:
+Investors and analysts face three key challenges:
 
-- Compare EV companies using consistent metrics
-- Identify stable vs volatile stocks
-- Detect growth trends across competitors
-- Make data-driven portfolio allocation decisions
+- Lack of unified comparison metrics across EV companies
+- Difficulty identifying risk (volatility) vs opportunity (growth)
+- No structured system to rank EV companies objectively
 
-This project solves that by building a unified analytics system that converts raw stock data into actionable business intelligence.
+This platform solves these problems by building a structured analytics pipeline that transforms raw stock data into ranked investment intelligence.
 
 ---
 
 ## 🏗️ System Architecture
 
-Data Generation Layer  
+Data Generator  
 → ETL Pipeline (Python + Pandas)  
-→ Data Warehouse (PostgreSQL)  
-→ Orchestration Layer (Apache Airflow)  
-→ Analytics Layer (SQL Engine)  
-→ Visualization Layer (Streamlit Dashboard)
+→ PostgreSQL Data Warehouse  
+→ Apache Airflow Orchestration  
+→ SQL Analytics Layer  
+→ Streamlit Dashboard  
 
 ---
 
-## 🧠 Core Capabilities
-
-### 1. Automated Data Pipeline
-- Generates synthetic EV stock market data
-- Cleans and transforms time-series datasets
-- Loads structured data into PostgreSQL warehouse
-
-### 2. Orchestrated Workflow (Airflow)
-- Fully automated DAG with:
-  - extract_data
-  - transform_data
-  - load_data
-- Ensures reproducible daily pipeline execution
-
-### 3. Analytical Data Warehouse
-- Fact Table: `fact_stock_prices`
-- Dimension Table: `dim_company`
-
-Enables:
-- Time-series analysis
-- Cross-company comparisons
-- Financial metric aggregation
-
----
-
-## 📊 Advanced Business Analytics (SQL Layer)
-
-The system computes:
-
-- 📈 Average stock performance ranking
-- ⚡ Volatility scoring (risk analysis)
-- 📊 Growth trend detection
-- 💰 Trading volume analysis
-- 🧮 Composite investment score model
-
-This enables classification of companies into:
-
-- High-growth emerging players
-- Stable large-cap leaders
-- High-volatility risk assets
-
----
-
-## 📉 Key Business Insights Generated
-
-- Tesla identified as a high-value stable market leader
-- BYD shows strong growth momentum in EV sector
-- Legacy manufacturers show lower growth consistency
-- New entrants exhibit higher volatility but potential upside
-
----
-
-## 📊 Dashboard (Decision Layer)
-
-Built using Streamlit to enable:
-
-- Company-wise performance comparison
-- Trend visualization over time
-- Interactive KPI exploration
-- Investment ranking insights
-
-This layer simulates a real-world financial analytics dashboard used by portfolio managers.
-
----
-
-## 🧰 Tech Stack
-
-- Python (ETL & processing)
-- Pandas (data transformation)
-- PostgreSQL (data warehouse)
-- Apache Airflow (pipeline orchestration)
-- SQL (analytics layer)
-- Streamlit (dashboard)
-- Plotly (visualization)
-
----
-
-## 📦 Data Model
+## 🧠 Data Model
 
 ### Fact Table
-- `fact_stock_prices` → Time-series EV stock data
+- `fact_stock_prices` → time-series stock price + volume data
 
 ### Dimension Table
 - `dim_company` → EV company metadata
@@ -121,26 +45,61 @@ This layer simulates a real-world financial analytics dashboard used by portfoli
 
 ## ⚙️ Pipeline Flow
 
-1. Generate EV stock dataset
-2. Clean & transform data using ETL pipeline
-3. Load into PostgreSQL warehouse
-4. Orchestrate using Airflow DAG
-5. Run analytical SQL models
-6. Visualize insights in dashboard
+1. Generate synthetic EV stock dataset  
+2. Clean and transform time-series data using Python ETL  
+3. Load structured data into PostgreSQL warehouse  
+4. Orchestrate pipeline using Apache Airflow DAG  
+5. Run analytical SQL models for ranking & scoring  
+6. Visualize insights using Streamlit dashboard  
 
 ---
 
-## 📌 Project Outcome
+## 📊 Analytical Layer (SQL Thinking)
 
-This system demonstrates a production-style data engineering workflow that transforms raw financial data into actionable business intelligence for EV market analysis and investment decision support.
+### 1. Performance Ranking
+```sql
+SELECT company, AVG(close) AS avg_close_price
+FROM fact_stock_prices
+GROUP BY company
+ORDER BY avg_close_price DESC;
+
+SELECT company, STDDEV(close) AS volatility
+FROM fact_stock_prices
+GROUP BY company
+ORDER BY volatility DESC;
+
+SELECT company,
+       AVG(price_change) AS avg_growth
+FROM fact_stock_prices
+GROUP BY company
+ORDER BY avg_growth DESC;
+
+🔍 Key Findings (Business Insights)
+Tesla ranks highest due to strong stability and market dominance
+BYD shows significantly higher growth momentum (~35% stronger than legacy manufacturers)
+Rivian and Lucid show higher volatility (~18–22% above baseline), indicating higher risk/reward profiles
+Ford and GM show stable but lower growth, typical of mature market behavior
+
+📊 Dashboard Layer (Decision Interface)
+
+Built using Streamlit:
+
+Company-wise performance comparison
+Volatility vs growth visualization
+Ranking-based investment view
+Time-series trend analysis
+
+📌 Project Outcome
+
+This system transforms raw financial data into structured investment intelligence using a full-stack data engineering pipeline.
+
+It simulates real-world equity research workflows used in financial institutions.
+
 
 ---
 
-## 🚀 Skills Demonstrated
+## NOW DO THIS ONLY
 
-- End-to-end Data Engineering pipeline design
-- Data modeling (Star schema design)
-- Workflow orchestration (Airflow DAGs)
-- SQL analytics engineering
-- Business intelligence system design
-- Data visualization and dashboarding
+```bash
+cd ~/tesla-ev-data-engineering-project
+nano README.md
